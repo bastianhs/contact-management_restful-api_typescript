@@ -23,21 +23,40 @@ This app can manage:
 
 ## Setup Project
 
+You can setup the project with Docker or locally.
+
+### Setup with Docker
+
+This is the simple setup.  
+
+```shell
+docker compose down
+docker compose build
+docker compose up
+docker compose exec -it backend npx prisma migrate dev
+```
+
+### Setup locally
+
+This setup is for development.  
+
 1. Copy .env.example file to the same directory
 
 2. Rename the file to .env
 
 3. Run the following commands:
-```shell
-docker compose up
+   ```shell
+   docker compose down
+   docker compose up db
+   npm install
+   npx prisma migrate dev
+   npx prisma generate
+   npm run build
+   npm run start
+   ```
 
-npm install
+After running the command `npx prisma generate`, the prisma client will be generated in the `dist` folder.
 
-npx prisma migrate dev
+When developing with typescript, you may also want to generate the prisma client in the `src` folder.  
 
-npx prisma generate
-
-npm run build
-
-npm run start
-```
+Change the output path in the `/prisma/schema.prisma`, then run `npx prisma migrate dev` again to generate the prisma client in the `src` folder.

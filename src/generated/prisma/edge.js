@@ -150,7 +150,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/home/bas/drive2_data/contact-management_api_typescript/src/generated/prisma",
+      "value": "/home/bas/drive2_data/contact-management_restful-api_typescript/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -164,7 +164,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "/home/bas/drive2_data/contact-management_api_typescript/prisma/schema.prisma",
+    "sourceFilePath": "/home/bas/drive2_data/contact-management_restful-api_typescript/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -178,16 +178,17 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://contact:contact@localhost:5432/contact?schema=public"
+        "value": null
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  username String  @id @db.VarChar(100)\n  password String  @db.VarChar(100)\n  name     String  @db.VarChar(100)\n  token    String? @db.VarChar(100)\n\n  contacts Contact[]\n\n  @@map(\"users\")\n}\n\nmodel Contact {\n  id         Int     @id @default(autoincrement())\n  first_name String? @db.VarChar(100)\n  last_name  String  @db.VarChar(100)\n  email      String? @db.VarChar(100)\n  phone      String? @db.VarChar(20)\n  username   String  @db.VarChar(100)\n\n  user      User      @relation(fields: [username], references: [username])\n  addresses Address[]\n\n  @@map(\"contacts\")\n}\n\nmodel Address {\n  id          Int     @id @default(autoincrement())\n  street      String? @db.VarChar(255)\n  city        String? @db.VarChar(100)\n  province    String? @db.VarChar(100)\n  country     String  @db.VarChar(100)\n  postal_code String  @db.VarChar(10)\n  contact_id  Int\n\n  contact Contact @relation(fields: [contact_id], references: [id])\n\n  @@map(\"addresses\")\n}\n",
-  "inlineSchemaHash": "668444ffd153a4e834d8ae97358609cde8b11ec305916db214faa7bc83eb93f4",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\" // when developing with typescript\n  // output   = \"../dist/generated/prisma\" // when running with javascript\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  username String  @id @db.VarChar(100)\n  password String  @db.VarChar(100)\n  name     String  @db.VarChar(100)\n  token    String? @db.VarChar(100)\n\n  contacts Contact[]\n\n  @@map(\"users\")\n}\n\nmodel Contact {\n  id         Int     @id @default(autoincrement())\n  first_name String? @db.VarChar(100)\n  last_name  String  @db.VarChar(100)\n  email      String? @db.VarChar(100)\n  phone      String? @db.VarChar(20)\n  username   String  @db.VarChar(100)\n\n  user      User      @relation(fields: [username], references: [username])\n  addresses Address[]\n\n  @@map(\"contacts\")\n}\n\nmodel Address {\n  id          Int     @id @default(autoincrement())\n  street      String? @db.VarChar(255)\n  city        String? @db.VarChar(100)\n  province    String? @db.VarChar(100)\n  country     String  @db.VarChar(100)\n  postal_code String  @db.VarChar(10)\n  contact_id  Int\n\n  contact Contact @relation(fields: [contact_id], references: [id])\n\n  @@map(\"addresses\")\n}\n",
+  "inlineSchemaHash": "de5db39d5cbfb1fad1dbf66a649801e0097d89164fe588a3fc316fb67da8d0f8",
   "copyEngine": true
 }
 config.dirname = '/'

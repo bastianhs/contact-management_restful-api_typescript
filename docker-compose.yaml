@@ -10,5 +10,17 @@ services:
       - db_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+  backend:
+    depends_on:
+      - db
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: postgresql://contact:contact@db:5432/contact?schema=public
+      PORT: 4000
+    ports:
+      - "4000:4000"
 volumes:
   db_data:
