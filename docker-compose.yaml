@@ -1,7 +1,7 @@
 services:
   db:
-    restart: always
-    image: postgres
+    restart: unless-stopped
+    image: postgres:17-alpine
     environment:
       POSTGRES_USER: contact
       POSTGRES_PASSWORD: contact
@@ -10,12 +10,5 @@ services:
       - db_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-  adminer:
-    depends_on:
-      - db
-    restart: always
-    image: adminer
-    ports:
-      - "8080:8080"
 volumes:
   db_data:

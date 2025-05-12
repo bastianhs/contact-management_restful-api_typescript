@@ -6,10 +6,8 @@
 
 generator client {
   provider = "prisma-client-js"
-
-  // change to "../src/generated/prisma" when developing with typescript
-  // change to "../dist/generated/prisma" when compiling to javascript
-  output   = "../dist/generated/prisma"
+  // output   = "../src/generated/prisma" // when developing with typescript
+  output   = "../dist/generated/prisma" // when running with javascript
 }
 
 datasource db {
